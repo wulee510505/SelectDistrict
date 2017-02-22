@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 纯白 -->
+    <color name="ctv_white">#fff</color>
+    <!-- 淡黑色 -->
+    <color name="ctv_black">#989898</color>
+
+    <color name="color_orange_light">#ffffbb33</color>
+    <color name="color_orange_dark">#ffff8800</color>
+    <color name="color_blue_bright">#ff00ddff</color>
+
+
+    <color name="colorPrimary">#4dbbaa</color>
+</resources>

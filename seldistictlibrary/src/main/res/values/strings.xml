@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SelDistictLibrary</string>
+
+    <!--选择地区-->
+    <string name="find_province">请选择省份：</string>
+    <string name="find_city">请选择城市：</string>
+    <string name="find_curr_province">当前选择的是：</string>
+    <string name="find_place">选择地区</string>
+    <string name="filtrate_by_district">市区筛选</string>
+    <string name="select_province">选择省</string>
+    <string name="select_city">选择市</string>
+    <string name="select_area">选择区/县</string>
+</resources>

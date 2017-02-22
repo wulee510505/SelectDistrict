@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true"> <!-- pressed state -->
+      <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+	    <!-- 外边框 -->
+	    <stroke
+	        android:width="1px"
+	        android:color="@color/colorPrimary" />
+	    
+	    <!-- 内容到边框的距离 -->
+	    <padding android:top="10dp"
+	        android:bottom="10dp"
+	        android:left="15dp"
+	        android:right="15dp"/>
+	    <solid 
+	        android:color="@color/colorPrimary"/>
+
+		  <corners android:topRightRadius="8dp"
+			  android:bottomRightRadius="8dp"/>
+       </shape>
+    </item>
+    <item> <!-- default state -->
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+	        <!-- 外边框 -->
+		    <stroke
+		        android:width="1px"
+		        android:color="@color/colorPrimary" />
+		    
+		    <!-- 内容到边框的距离 -->
+		    <padding android:top="10dp"
+		        android:bottom="10dp"
+		        android:left="15dp"
+		        android:right="15dp"/>
+		    <solid 
+		        android:color="@color/ctv_white"/>
+			<corners android:topRightRadius="8dp"
+				android:bottomRightRadius="8dp"/>
+         </shape>
+    </item>
+</selector>

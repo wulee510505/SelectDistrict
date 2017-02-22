@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+         android:id="@+id/sg_tv_findplace"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:background="#e5e5e5"
+         android:textColor="@color/ctv_black"
+         android:paddingLeft="20dip"
+         android:paddingTop="10dip"
+         android:paddingBottom="10dip"
+         android:text="@string/find_province"
+         android:textSize="14sp" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:orientation="vertical" >
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dip"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <RadioButton
+                android:id="@+id/tag1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/select_province"
+                android:background="@drawable/com_btn_bg_left"
+                android:button="@null"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/tag2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/select_city"
+                android:background="@drawable/com_btn_bg_middle"
+                android:button="@null"
+                android:textSize="14sp" />
+            
+            <RadioButton
+                android:id="@+id/tag3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/select_area"
+                android:background="@drawable/com_btn_bg_right"
+                android:button="@null"
+                android:textSize="14sp" />
+        </RadioGroup>
+
+        <com.wulee.seldistictlibrary.widget.NoScroViewPager
+            android:id="@+id/place_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"/>
+    </LinearLayout>
+
+</LinearLayout>
