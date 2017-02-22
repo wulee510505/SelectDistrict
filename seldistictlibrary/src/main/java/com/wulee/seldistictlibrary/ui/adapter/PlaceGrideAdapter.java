@@ -69,11 +69,11 @@ public class PlaceGrideAdapter extends BaseAdapter {
 		}
 		
 		if(mPosition == position){
-			itemView.mNameTV.setBackgroundColor(mContext.getResources().getColor(R.color.color_blue_bright));
+			itemView.mNameTV.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
 			itemView.mNameTV.setTextColor(Color.WHITE);
 		}else{
 			itemView.mNameTV.setBackgroundColor(mContext.getResources().getColor(R.color.color_blue_bright));
-			itemView.mNameTV.setTextColor(mContext.getResources().getColor(R.color.color_orange_dark));
+			itemView.mNameTV.setTextColor(mContext.getResources().getColor(R.color.ctv_black2));
 		}
 		SearchComPlace place = (SearchComPlace) getItem(position);
 	    itemView.mNameTV.setText(place.getName());

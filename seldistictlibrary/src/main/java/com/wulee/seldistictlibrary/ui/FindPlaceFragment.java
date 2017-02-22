@@ -265,22 +265,21 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 		mComViewPager.setAdapter(mPageAdapter);
 	}
 
-    OnClickListener submitClickListener = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
 
-			StringBuilder IdSB = new StringBuilder();
-			StringBuilder NameSB = new StringBuilder();
+	public SearchComPlaceResult getSelectDistrictInfo(){
 
-			SearchComPlaceResult result = new SearchComPlaceResult();
-			String provinceName = "";
-			String cityName = "";
+		StringBuilder IdSB = new StringBuilder();
+		StringBuilder NameSB = new StringBuilder();
 
-			switch (req_Level) {
+		SearchComPlaceResult result = new SearchComPlaceResult();
+		String provinceName = "";
+		String cityName = "";
+
+		switch (req_Level) {
 			case REQ_LEVEL_1:
 				if(TextUtils.isEmpty(selProvinceId)){
 					Toast.makeText(mContext, "请选择省份", Toast.LENGTH_SHORT).show();
-					return;
+					return result;
 				}
 				IdSB.append(selProvinceId);
 				provinceName = mPlaceDao.findProvinceByID(selProvinceId);
@@ -293,7 +292,7 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 			case REQ_LEVEL_2:
 				if(TextUtils.isEmpty(selProvinceId)){
 					Toast.makeText(mContext, "请选择省份", Toast.LENGTH_SHORT).show();
-					return;
+					return result;
 				}else{
 					if(Util.isSpeRegion(Integer.parseInt(selProvinceId))){
 						IdSB.append(selProvinceId).append("-").append(selProvinceId).append("-").append(selProvinceId);
@@ -308,21 +307,21 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 						result.setCityName("");
 						result.setAreaName("");
 					}else if(Util.isDireGovernment(Integer.parseInt(selProvinceId))){
-						    selCityId = selProvinceId;
-							IdSB.append(selProvinceId).append("-").append(selCityId);
+						selCityId = selProvinceId;
+						IdSB.append(selProvinceId).append("-").append(selCityId);
 
-							provinceName = mPlaceDao.findProvinceByID(selProvinceId);
-							cityName = "";
-							NameSB.append(provinceName);
+						provinceName = mPlaceDao.findProvinceByID(selProvinceId);
+						cityName = "";
+						NameSB.append(provinceName);
 
-							result.setProvinceID(Integer.parseInt(selProvinceId));
-							result.setProvinceName(provinceName);
-							result.setCityID(Integer.parseInt(selProvinceId));
-							result.setCityName(cityName);
+						result.setProvinceID(Integer.parseInt(selProvinceId));
+						result.setProvinceName(provinceName);
+						result.setCityID(Integer.parseInt(selProvinceId));
+						result.setCityName(cityName);
 					}else{
 						if(TextUtils.isEmpty(selCityId)){
 							Toast.makeText(mContext, "请选择市", Toast.LENGTH_SHORT).show();
-							return;
+							return result;
 						}else{
 							IdSB.append(selProvinceId).append("-").append(selCityId);
 
@@ -342,7 +341,7 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 			case REQ_LEVEL_3:
 				if(TextUtils.isEmpty(selProvinceId)){
 					Toast.makeText(mContext, "请选择省份", Toast.LENGTH_SHORT).show();
-					return;
+					return result;
 				}else{
 					if(Util.isSpeRegion(Integer.parseInt(selProvinceId))){
 						IdSB.append(selProvinceId).append("-").append(selProvinceId).append("-").append(selProvinceId);
@@ -359,11 +358,11 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 					}else{
 						if(TextUtils.isEmpty(selCityId)){
 							Toast.makeText(mContext, "请选择市", Toast.LENGTH_SHORT).show();
-							return;
+							return result;
 						}else{
 							if(TextUtils.isEmpty(selAreaId)){
 								Toast.makeText(mContext, "请选择区/县", Toast.LENGTH_SHORT).show();
-								return;
+								return result;
 							}else{
 								IdSB.append(selProvinceId).append("-").append(selCityId).append("-").append(selAreaId);
 
@@ -387,11 +386,10 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 				break;
 			default:
 				break;
-			}
-
-			Toast.makeText(mContext, result.toString(), Toast.LENGTH_SHORT).show();
 		}
-	};
+		return result;
+	}
+
 
 
 	private void initTagButton() {
@@ -405,7 +403,7 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 			break;
         case REQ_LEVEL_2:
           	tag1.setTextColor(getResources().getColor(R.color.ctv_white));
-    		tag2.setTextColor(getResources().getColor(R.color.color_orange_light));
+    		tag2.setTextColor(getResources().getColor(R.color.colorPrimary));
     		tag1.setChecked(true);
 			tag2.setBackgroundResource(R.drawable.com_btn_bg_right);
 			tag2.setChecked(false);
@@ -413,8 +411,8 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 			break;
         case REQ_LEVEL_3:
         	tag1.setTextColor(getResources().getColor(R.color.ctv_white));
-    		tag2.setTextColor(getResources().getColor(R.color.color_orange_light));
-    		tag3.setTextColor(getResources().getColor(R.color.color_orange_light));
+    		tag2.setTextColor(getResources().getColor(R.color.colorPrimary));
+    		tag3.setTextColor(getResources().getColor(R.color.colorPrimary));
     		tag1.setChecked(true);
     		tag2.setChecked(false);
 			tag3.setChecked(false);
@@ -508,26 +506,26 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 					tag1.setChecked(true);
 					tag2.setChecked(false);
 					tag1.setTextColor(getResources().getColor(R.color.ctv_white));
-					tag2.setTextColor(getResources().getColor(R.color.color_orange_light));
+					tag2.setTextColor(getResources().getColor(R.color.colorPrimary));
 				}else if(checkedId == R.id.tag2){
 					tag1.setChecked(false);
 					tag2.setChecked(true);
-					tag1.setTextColor(getResources().getColor(R.color.color_orange_light));
+					tag1.setTextColor(getResources().getColor(R.color.colorPrimary));
 					tag2.setTextColor(getResources().getColor(R.color.ctv_white));
 				}
 				break;
 			case REQ_LEVEL_3:
 				if (checkedId == R.id.tag1){
 					tag1.setTextColor(getResources().getColor( R.color.ctv_white));
-					tag2.setTextColor(getResources().getColor( R.color.color_orange_light));
-					tag3.setTextColor(getResources().getColor(R.color.color_orange_light));
+					tag2.setTextColor(getResources().getColor( R.color.colorPrimary));
+					tag3.setTextColor(getResources().getColor(R.color.colorPrimary));
 					tag1.setChecked(true);
 					tag2.setChecked(false);
 					tag3.setChecked(false);
 				}else if(checkedId == R.id.tag2){
-					tag1.setTextColor(getResources().getColor( R.color.color_orange_light));
+					tag1.setTextColor(getResources().getColor( R.color.colorPrimary));
 					tag2.setTextColor(getResources().getColor( R.color.ctv_white));
-					tag3.setTextColor(getResources().getColor(R.color.color_orange_light));
+					tag3.setTextColor(getResources().getColor(R.color.colorPrimary));
 					tag1.setChecked(false);
 					tag2.setChecked(true);
 					tag3.setChecked(false);
@@ -563,12 +561,12 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 				tag1.setChecked(true);
 				tag2.setChecked(false);
 				tag1.setTextColor(getResources().getColor(R.color.ctv_white));
-				tag2.setTextColor(getResources().getColor(R.color.color_orange_light));
+				tag2.setTextColor(getResources().getColor(R.color.colorPrimary));
 				break;
 			case 1:
 				tag1.setChecked(false);
 				tag2.setChecked(true);
-				tag1.setTextColor(getResources().getColor(R.color.color_orange_light));
+				tag1.setTextColor(getResources().getColor(R.color.colorPrimary));
 				tag2.setTextColor(getResources().getColor(R.color.ctv_white));
 				break;
 			default:
@@ -579,23 +577,23 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 			switch (arg0) {
 			case 0:
 				tag1.setTextColor(getResources().getColor( R.color.ctv_white));
-				tag2.setTextColor(getResources().getColor( R.color.color_orange_light));
-				tag3.setTextColor(getResources().getColor(R.color.color_orange_light));
+				tag2.setTextColor(getResources().getColor( R.color.colorPrimary));
+				tag3.setTextColor(getResources().getColor(R.color.colorPrimary));
 				tag1.setChecked(true);
 				tag2.setChecked(false);
 				tag3.setChecked(false);
 				break;
 				case 1:
-					tag1.setTextColor(getResources().getColor( R.color.color_orange_light));
+					tag1.setTextColor(getResources().getColor( R.color.colorPrimary));
 				tag2.setTextColor(getResources().getColor( R.color.ctv_white));
-				tag3.setTextColor(getResources().getColor(R.color.color_orange_light));
+				tag3.setTextColor(getResources().getColor(R.color.colorPrimary));
 				tag1.setChecked(false);
 				tag2.setChecked(true);
 				tag3.setChecked(false);
 				break;
 			case 2:
-				tag1.setTextColor(getResources().getColor( R.color.color_orange_light));
-				tag2.setTextColor(getResources().getColor( R.color.color_orange_light));
+				tag1.setTextColor(getResources().getColor( R.color.colorPrimary));
+				tag2.setTextColor(getResources().getColor( R.color.colorPrimary));
 				tag3.setTextColor(getResources().getColor(R.color.ctv_white));
 				tag1.setChecked(false);
 				tag2.setChecked(false);

@@ -39,7 +39,6 @@ public class PlaceDao {
 	private SQLiteDatabase mdb;
 
 
-
 	public PlaceDao(Context context) {
 		// TODO Auto-generated constructor stub
 		if(TextUtils.isEmpty(APP_DATA_DIR)) {
@@ -52,13 +51,13 @@ public class PlaceDao {
 		String dbDirPath = APP_DATA_DIR + "/databases/";
 
 		Util.delFile(dbDirPath + PLACE_DB_NAME);
-		
+
+		isFolderExists(dbDirPath);
+
 		File file2 = new File(dbDirPath + PLACE_DB_NAME_V2);
 		if (file2.exists()) {
 			mHelper = new PlaceHelper(mContext);
 			mdb = mHelper.getReadableDatabase();
-
-			
 		} else {
 			try {
 				InputStream is = context.getAssets().open(PLACE_DB_NAME_V2);
@@ -76,6 +75,17 @@ public class PlaceDao {
 				Log.i("error", "IOException");
 			}
 		}
+	}
+
+	boolean isFolderExists(String strFolder) {
+		File file = new File(strFolder);
+		if (!file.exists()){
+			if (file.mkdir()) {
+				return true;
+			} else
+				return false;
+		}
+		return true;
 	}
 
 	private void CopyDB(InputStream inputStream, OutputStream outputStream) throws IOException {
@@ -420,12 +430,10 @@ public class PlaceDao {
 			super(context, PLACE_DB_NAME_V2, null, PLACE_DB_VERSION);
 			// TODO Auto-generated constructor stub
 		}
-
 		@Override
 		public void onCreate(SQLiteDatabase db) {
 			// TODO Auto-generated method stub
 		}
-
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		}

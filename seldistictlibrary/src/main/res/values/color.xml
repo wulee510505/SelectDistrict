@@ -2,8 +2,11 @@
 <resources>
     <!-- 纯白 -->
     <color name="ctv_white">#fff</color>
+
+    <color name="ctv_black1">#000000</color>
+    <color name="ctv_black2">#656565</color>
     <!-- 淡黑色 -->
-    <color name="ctv_black">#989898</color>
+    <color name="ctv_black3">#989898</color>
 
     <color name="color_orange_light">#ffffbb33</color>
     <color name="color_orange_dark">#ffff8800</color>
