@@ -66,7 +66,7 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		mContext = getActivity();
-		View view  = inflater.inflate(R.layout.search_place_main,container,false);
+		View view  = inflater.inflate(R.layout.search_place_fragment_main,container,false);
 
 		Bundle bundle = getArguments();
 		req_Level = bundle.getInt(INTENT_REQ_LEVEL, REQ_LEVEL_3);
