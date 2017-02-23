@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int PLACE_REQUEST = 100;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -65,7 +65,10 @@ public class MainActivity extends AppCompatActivity {
         btnActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(MainActivity.this, FindPlaceActivity.class),PLACE_REQUEST);
+                Intent intent = new Intent(MainActivity.this, FindPlaceActivity.class);
+                intent.putExtra(FindPlaceActivity.INTENT_REQ_LEVEL,3);
+                intent.putExtra(FindPlaceActivity.INTENT_BG_TITLE_COLOR,getResources().getColor(R.color.color_orange_light));
+                startActivityForResult(intent,PLACE_REQUEST);
             }
         });
 
@@ -105,4 +108,5 @@ public class MainActivity extends AppCompatActivity {
         }
         Toast.makeText(this, placeInfo, Toast.LENGTH_SHORT).show();
     }
+
 }
