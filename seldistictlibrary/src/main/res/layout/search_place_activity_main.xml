@@ -7,15 +7,36 @@
     <RelativeLayout
         android:id="@+id/title_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:background="@color/colorAccent">
 
 
-        <Button
-            android:id="@+id/btn_back"
+        <RelativeLayout
+            android:id="@+id/rl_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="返回"/>
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_back"/>
+
+            <TextView
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/iv_back"
+                android:layout_centerVertical="true"
+                android:textColor="@color/ctv_white"
+                android:text="返回"/>
+        </RelativeLayout>
 
 
         <TextView
@@ -23,15 +44,18 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textColor="@color/ctv_white"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:text="选择省市区"/>
 
 
-        <Button
+        <TextView
             android:id="@+id/btn_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="@color/ctv_white"
             android:layout_alignParentRight="true"
+            android:textSize="18sp"
             android:text="确定"/>
 
     </RelativeLayout>

@@ -14,7 +14,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -49,7 +48,8 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
 	private RadioButton tag1, tag2, tag3;
 	private NoScroViewPager mComViewPager;
 	private RelativeLayout mTitleLayout;
-    private Button btnBack,btnConfirm;
+	private RelativeLayout backLauout;
+    private TextView btnConfirm;
 
 	private List<View> pagerViews;
 	private MyPageAdapter mPageAdapter;
@@ -88,7 +88,7 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
 	}
 
     private void addListener() {
-        btnBack.setOnClickListener(this);
+		backLauout.setOnClickListener(this);
         btnConfirm.setOnClickListener(this);
 
         tag1.setOnClickListener(this);
@@ -131,8 +131,8 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
 		mTitleLayout = (RelativeLayout) findViewById(R.id.title_layout);
         mTitleLayout.setBackgroundColor(bgTitleColor);
 
-        btnBack = (Button) findViewById(R.id.btn_back);
-        btnConfirm = (Button) findViewById(R.id.btn_confirm);
+        backLauout = (RelativeLayout) findViewById(R.id.rl_back);
+        btnConfirm = (TextView) findViewById(R.id.btn_confirm);
 		mTextView = (TextView)findViewById(R.id.sg_tv_findplace);
 		mComViewPager = (NoScroViewPager) findViewById(R.id.place_viewpager);
 		RadioGroup rg = (RadioGroup)findViewById(R.id.radioGroup);
@@ -456,7 +456,7 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
 				return;
 			}
 			mComViewPager.setCurrentItem(2);
-		}else if(v.getId() == R.id.btn_back){
+		}else if(v.getId() == R.id.rl_back){
              finish();
         }else if(v.getId() == R.id.btn_confirm){
 			Intent intent = getIntent();
