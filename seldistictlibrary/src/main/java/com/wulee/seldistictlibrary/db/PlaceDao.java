@@ -420,7 +420,116 @@ public class PlaceDao {
 		}
 		return retObj;
 	}
-	
+
+	public String findProNameByAreaId(String areaId) {
+		String cityId = findCityIdByAreaId(areaId);
+		String provinceId = findProvinceIdByCityId(cityId);
+		return findProvinceByID(provinceId);
+	}
+
+	/**
+	 * @param id 有可能是省ID,也可能是市ID，也可能是区ID
+	 * @return 相应的名称
+	 */
+	public String findNiceNameById(String id) {
+		if ("820000".equals(id) || "810000".equals(id) || "710000".equals(id)) {
+			return findProvinceByID(id);
+		}
+		String name;
+		String areaName = findAreaByID(id);
+		if (TextUtils.isEmpty(areaName)) {
+			//不是区ID，假设是市ID
+			String cityName = findCityByID(id);
+			if (TextUtils.isEmpty(cityName)) {
+				//不是市ID，是省ID
+				String proviceName = findProvinceByID(id);
+				name = proviceName;
+			} else {
+				String proviceName = findProvinceByID(findProvinceIdByCityId(id));
+				name = proviceName + "-" + cityName ;
+			}
+		} else {
+			String cityName = findCityByID(findCityIdByAreaId(id));
+			String proviceName = findProNameByAreaId(id);
+			name = proviceName + "-" + cityName + "-" + areaName;
+		}
+		return name;
+	}
+
+	/**
+	 * @param id 有可能是省ID,也可能是市ID，也可能是区ID
+	 * @return 省的ID
+	 */
+	public String getProviceId(String id){
+		if(TextUtils.isEmpty(id)){
+			return "";
+		}
+
+		String proviceName = findProvinceByID(id);
+		if(!TextUtils.isEmpty(proviceName)){
+			//是省ID
+			return id;
+		}
+		//假设是市ID
+		String proviceId = findProvinceIdByCityId(id);
+		if(!TextUtils.isEmpty(proviceId)){
+			return  proviceId;
+		}
+
+		//假设是区ID
+		proviceId = findProvinceIdByCityId(findCityIdByAreaId(id));
+		return proviceId;
+	}
+
+	/**
+	 *
+	 * @param id    有可能是省ID,也可能是市ID，也可能是区ID
+	 * @return  市的ID,如果是省的ID,返回""
+	 */
+	public String getCityId(String id){
+		if(TextUtils.isEmpty(id)){
+			return "";
+		}
+
+		String proviceName = findProvinceByID(id);
+		if(!TextUtils.isEmpty(proviceName)){
+			//是省ID
+			return "";
+		}
+		//假设是市ID
+		String proviceId = findProvinceIdByCityId(id);
+		if(!TextUtils.isEmpty(proviceId)){
+			return  id;
+		}
+		//假设是区ID
+		String cityId = findCityIdByAreaId(id);
+		return cityId;
+	}
+
+	/**
+	 *
+	 * @param id    有可能是省ID,也可能是市ID，也可能是区ID
+	 * @return  区的ID,如果是省的ID,返回""
+	 *                 如果是市的ID,返回""
+	 */
+	public String getAreaId(String id){
+		if(TextUtils.isEmpty(id)){
+			return "";
+		}
+
+		String proviceName = findProvinceByID(id);
+		if(!TextUtils.isEmpty(proviceName)){
+			//是省ID
+			return "";
+		}
+		//假设是市ID
+		String proviceId = findProvinceIdByCityId(id);
+		if(!TextUtils.isEmpty(proviceId)){
+			return  "";
+		}
+
+		return id;
+	}
 	
 	/**
 	 * 创建内部类DatabaseHelper：创建数据库，穿件表，更新表功能
