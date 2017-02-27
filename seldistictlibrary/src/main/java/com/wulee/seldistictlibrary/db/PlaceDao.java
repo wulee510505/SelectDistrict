@@ -512,7 +512,7 @@ public class PlaceDao {
 	 * @return  区的ID,如果是省的ID,返回""
 	 *                 如果是市的ID,返回""
 	 */
-	public String getAreaId(String id){
+	public String getAreaId (String id){
 		if(TextUtils.isEmpty(id)){
 			return "";
 		}
