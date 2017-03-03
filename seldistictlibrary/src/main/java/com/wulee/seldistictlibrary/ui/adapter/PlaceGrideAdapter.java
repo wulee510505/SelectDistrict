@@ -3,6 +3,7 @@ package com.wulee.seldistictlibrary.ui.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,7 +20,10 @@ public class PlaceGrideAdapter extends BaseAdapter {
 	private List<SearchComPlace> mList;
 	private Context mContext;
 	private int mPosition = -1 ;
-	
+
+	private int colorSelItemBg;
+	private int colorDefItemBg;
+
 	public void setPlaceData(List<SearchComPlace> list) {
 		if (list != null) this.mList = list;
 		else {
@@ -33,9 +37,11 @@ public class PlaceGrideAdapter extends BaseAdapter {
 	}
 	
 	
-	public PlaceGrideAdapter(Context context, List<SearchComPlace> list) {
+	public PlaceGrideAdapter(Context context, List<SearchComPlace> list,int bgDefColor,int bgSelColor) {
 		this.setPlaceData(list);
 		mContext = context;
+		colorDefItemBg = bgDefColor;
+		colorSelItemBg = bgSelColor;
 	}
 	
 	@Override
@@ -69,11 +75,11 @@ public class PlaceGrideAdapter extends BaseAdapter {
 		}
 		
 		if(mPosition == position){
-			itemView.mNameTV.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
+			itemView.mNameTV.setBackgroundColor(colorSelItemBg);
 			itemView.mNameTV.setTextColor(Color.WHITE);
 		}else{
-			itemView.mNameTV.setBackgroundColor(mContext.getResources().getColor(R.color.color_blue_bright));
-			itemView.mNameTV.setTextColor(mContext.getResources().getColor(R.color.ctv_black2));
+			itemView.mNameTV.setBackgroundColor(colorDefItemBg);
+			itemView.mNameTV.setTextColor(ContextCompat.getColor(mContext,R.color.ctv_black2));
 		}
 		SearchComPlace place = (SearchComPlace) getItem(position);
 	    itemView.mNameTV.setText(place.getName());

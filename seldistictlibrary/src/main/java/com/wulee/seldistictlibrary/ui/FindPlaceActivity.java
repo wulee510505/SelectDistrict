@@ -43,6 +43,8 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
 	public final static String SELECTED_DISTRICT_ID = "selected_district_id"; //选择的地区id
 
     public final static String INTENT_BG_TITLE_COLOR = "bg_title_color"; //标题颜色
+    public final static String INTENT_BG_GRIDITEM_DEF_COLOR = "bg_griditem_def_color"; //item默认背景色
+    public final static String INTENT_BG_GRIDITEM_SEL_COLOR = "bg_griditem_sel_color"; //item选中背景色
 
 	private TextView mTextView;
 	private RadioButton tag1, tag2, tag3;
@@ -68,6 +70,8 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
 	private Context mContext;
 
     private int bgTitleColor;
+    private int bgGridItemDefColor; //item默认背景色
+    private int bgGridItemSelColor; //item选中背景色
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,8 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
 		provinceId = intent.getStringExtra(INTENT_PROVINCE_ID);
 		districtId = intent.getStringExtra(SELECTED_DISTRICT_ID);
         bgTitleColor = intent.getIntExtra(INTENT_BG_TITLE_COLOR, -1);
+        bgGridItemDefColor = intent.getIntExtra(INTENT_BG_GRIDITEM_DEF_COLOR, -1);
+        bgGridItemSelColor = intent.getIntExtra(INTENT_BG_GRIDITEM_SEL_COLOR, -1);
 
 		mPlaceDao = new PlaceDao(mContext);
 		initView();
@@ -107,7 +113,7 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
 			cityList.clear();
 			cityList = mPlaceDao.findAllCityByProvinceID(provinceId);
 
-			placeGrideAdapter2 = new PlaceGrideAdapter(mContext,cityList);
+			placeGrideAdapter2 = new PlaceGrideAdapter(mContext,cityList,bgGridItemDefColor,bgGridItemSelColor);
 			gridView2.setAdapter(placeGrideAdapter2);
 			placeGrideAdapter2.notifyDataSetChanged();
 			mPageAdapter.notifyDataSetChanged();
@@ -157,7 +163,7 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
 		final String[] provinceName = new String[1];
 		final String[] cityName = new String[1];
 
-		placeGrideAdapter1 = new PlaceGrideAdapter(mContext,provinceList);
+		placeGrideAdapter1 = new PlaceGrideAdapter(mContext,provinceList,bgGridItemDefColor,bgGridItemSelColor);
 		gridView1.setAdapter(placeGrideAdapter1);
 
 
@@ -191,7 +197,7 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
 					List<SearchComPlace> dataList2 = mPlaceDao.findAllCityByProvinceID(selProvinceId);
 					if(null != dataList2 && dataList2.size() >0){
 						cityList.addAll(dataList2);
-						placeGrideAdapter2 = new PlaceGrideAdapter(mContext,cityList);
+						placeGrideAdapter2 = new PlaceGrideAdapter(mContext,cityList,bgGridItemDefColor,bgGridItemSelColor);
 						gridView2.setAdapter(placeGrideAdapter2);
 						placeGrideAdapter2.notifyDataSetChanged();
 						mPageAdapter.notifyDataSetChanged();
@@ -208,7 +214,7 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
 					List<SearchComPlace> dataList2 = mPlaceDao.findAllCityByProvinceID(selProvinceId);
 					if(null != dataList2 && dataList2.size() >0){
 						cityList.addAll(dataList2);
-						placeGrideAdapter2 = new PlaceGrideAdapter(mContext,cityList);
+						placeGrideAdapter2 = new PlaceGrideAdapter(mContext,cityList,bgGridItemDefColor,bgGridItemSelColor);
 						gridView2.setAdapter(placeGrideAdapter2);
 						placeGrideAdapter2.notifyDataSetChanged();
 						mPageAdapter.notifyDataSetChanged();
@@ -246,7 +252,7 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
 					List<SearchComPlace> dataList3 = mPlaceDao.findAllAreaByCityID(selCityId);
 					if(null != dataList3 && dataList3.size() >0){
 						areaList.addAll(dataList3);
-						placeGrideAdapter3 = new PlaceGrideAdapter(mContext,areaList);
+						placeGrideAdapter3 = new PlaceGrideAdapter(mContext,areaList,bgGridItemDefColor,bgGridItemSelColor);
 						gridView3.setAdapter(placeGrideAdapter3);
 						placeGrideAdapter3.notifyDataSetChanged();
 						mPageAdapter.notifyDataSetChanged();

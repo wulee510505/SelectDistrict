@@ -41,6 +41,9 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 	public final static String INTENT_PROVINCE_ID = "province_id"; //省id
 	public final static String SELECTED_DISTRICT_ID = "selected_district_id"; //选择的地区id
 
+	public final static String INTENT_BG_GRIDITEM_DEF_COLOR = "bg_griditem_def_color"; //item默认背景色
+	public final static String INTENT_BG_GRIDITEM_SEL_COLOR = "bg_griditem_sel_color"; //item选中背景色
+
 	private TextView mTextView;
 	private RadioButton tag1, tag2, tag3;
 	private NoScroViewPager mComViewPager;
@@ -61,6 +64,8 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 	private String currSelPId,currSelCId,currSelAId;
 	private Context mContext;
 
+	private int bgGridItemDefColor; //item默认背景色
+	private int bgGridItemSelColor; //item选中背景色
 
 	@Nullable
 	@Override
@@ -72,6 +77,8 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 		req_Level = bundle.getInt(INTENT_REQ_LEVEL, REQ_LEVEL_3);
 		provinceId = bundle.getString(INTENT_PROVINCE_ID);
 		districtId = bundle.getString(SELECTED_DISTRICT_ID);
+		bgGridItemDefColor = bundle.getInt(INTENT_BG_GRIDITEM_DEF_COLOR,-1);
+		bgGridItemSelColor = bundle.getInt(INTENT_BG_GRIDITEM_SEL_COLOR,-1);
 
 		mPlaceDao = new PlaceDao(mContext);
 		initView(view);
@@ -91,7 +98,7 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 			cityList.clear();
 			cityList = mPlaceDao.findAllCityByProvinceID(provinceId);
 
-			placeGrideAdapter2 = new PlaceGrideAdapter(mContext,cityList);
+			placeGrideAdapter2 = new PlaceGrideAdapter(mContext,cityList,bgGridItemDefColor,bgGridItemSelColor);
 			gridView2.setAdapter(placeGrideAdapter2);
 			placeGrideAdapter2.notifyDataSetChanged();
 			mPageAdapter.notifyDataSetChanged();
@@ -140,7 +147,7 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 		final String[] provinceName = new String[1];
 		final String[] cityName = new String[1];
 
-		placeGrideAdapter1 = new PlaceGrideAdapter(mContext,provinceList);
+		placeGrideAdapter1 = new PlaceGrideAdapter(mContext,provinceList,bgGridItemDefColor,bgGridItemSelColor);
 		gridView1.setAdapter(placeGrideAdapter1);
 
 
@@ -174,7 +181,7 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 					List<SearchComPlace> dataList2 = mPlaceDao.findAllCityByProvinceID(selProvinceId);
 					if(null != dataList2 && dataList2.size() >0){
 						cityList.addAll(dataList2);
-						placeGrideAdapter2 = new PlaceGrideAdapter(mContext,cityList);
+						placeGrideAdapter2 = new PlaceGrideAdapter(mContext,cityList,bgGridItemDefColor,bgGridItemSelColor);
 						gridView2.setAdapter(placeGrideAdapter2);
 						placeGrideAdapter2.notifyDataSetChanged();
 						mPageAdapter.notifyDataSetChanged();
@@ -191,7 +198,7 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 					List<SearchComPlace> dataList2 = mPlaceDao.findAllCityByProvinceID(selProvinceId);
 					if(null != dataList2 && dataList2.size() >0){
 						cityList.addAll(dataList2);
-						placeGrideAdapter2 = new PlaceGrideAdapter(mContext,cityList);
+						placeGrideAdapter2 = new PlaceGrideAdapter(mContext,cityList,bgGridItemDefColor,bgGridItemSelColor);
 						gridView2.setAdapter(placeGrideAdapter2);
 						placeGrideAdapter2.notifyDataSetChanged();
 						mPageAdapter.notifyDataSetChanged();
@@ -229,7 +236,7 @@ public class FindPlaceFragment extends Fragment implements OnClickListener, OnPa
 					List<SearchComPlace> dataList3 = mPlaceDao.findAllAreaByCityID(selCityId);
 					if(null != dataList3 && dataList3.size() >0){
 						areaList.addAll(dataList3);
-						placeGrideAdapter3 = new PlaceGrideAdapter(mContext,areaList);
+						placeGrideAdapter3 = new PlaceGrideAdapter(mContext,areaList,bgGridItemDefColor,bgGridItemSelColor);
 						gridView3.setAdapter(placeGrideAdapter3);
 						placeGrideAdapter3.notifyDataSetChanged();
 						mPageAdapter.notifyDataSetChanged();

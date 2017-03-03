@@ -1,9 +1,11 @@
 package com.wulee.selectdistrict;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 final FindPlaceFragment findPlaceFragment = new FindPlaceFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt(FindPlaceFragment.INTENT_REQ_LEVEL, 3);
+                bundle.putInt(FindPlaceActivity.INTENT_BG_GRIDITEM_DEF_COLOR, Color.YELLOW);
+                bundle.putInt(FindPlaceActivity.INTENT_BG_GRIDITEM_SEL_COLOR, Color.GREEN);
                 findPlaceFragment.setArguments(bundle);
 
                 fragmentTransaction.add(R.id.fragment_container, findPlaceFragment);
@@ -67,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, FindPlaceActivity.class);
                 intent.putExtra(FindPlaceActivity.INTENT_REQ_LEVEL,3);
-                intent.putExtra(FindPlaceActivity.INTENT_BG_TITLE_COLOR,getResources().getColor(R.color.color_orange_light));
+                intent.putExtra(FindPlaceActivity.INTENT_BG_TITLE_COLOR, ContextCompat.getColor(MainActivity.this,R.color.color_orange_dark));
+                intent.putExtra(FindPlaceActivity.INTENT_BG_GRIDITEM_DEF_COLOR, Color.GREEN);
+                intent.putExtra(FindPlaceActivity.INTENT_BG_GRIDITEM_SEL_COLOR, Color.RED);
                 startActivityForResult(intent,PLACE_REQUEST);
             }
         });
