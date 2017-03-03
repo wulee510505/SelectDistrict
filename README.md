@@ -19,4 +19,41 @@ Step 2. Add the dependency
 	        compile 'com.github.wulee510505:SelectDistrict:1.0.3'
 	}
 	
+activity调用方法如下：
+
+   Intent intent = new Intent(MainActivity.this, FindPlaceActivity.class);
+   intent.putExtra(FindPlaceActivity.INTENT_REQ_LEVEL,FindPlaceActivity.REQ_LEVEL_3);//选择级别，默认是省市区三级
+   intent.putExtra(FindPlaceActivity.INTENT_BG_TITLE_COLOR,ContextCompat.getColor(MainActivity.this,R.color.color_orange_dark));//标题色    intent.putExtra(FindPlaceActivity.INTENT_BG_GRIDITEM_DEF_COLOR, Color.GREEN);//item默认颜色
+   intent.putExtra(FindPlaceActivity.INTENT_BG_GRIDITEM_SEL_COLOR, Color.RED);//item选中颜色
+   startActivityForResult(intent,PLACE_REQUEST);
+	
+  @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data != null) {
+            SearchComPlaceResult pr = (SearchComPlaceResult) data.getSerializableExtra(FindPlaceActivity.INTENT_RETURN_PLACE);
+	    //省市区信息对象，从中取出您想要的数据
+           
+            
+        }
+    }
+	
+	
+	
+fragment调用方法：
+
+   FragmentManager fragmentManager = getSupportFragmentManager();
+   FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+   final FindPlaceFragment findPlaceFragment = new FindPlaceFragment();
+   Bundle bundle = new Bundle();
+   bundle.putInt(FindPlaceFragment.INTENT_REQ_LEVEL, FindPlaceActivity.REQ_LEVEL_3);//选择级别，默认是省市区三级
+   bundle.putInt(FindPlaceActivity.INTENT_BG_GRIDITEM_DEF_COLOR, Color.YELLOW);//item默认颜色
+   bundle.putInt(FindPlaceActivity.INTENT_BG_GRIDITEM_SEL_COLOR, Color.GREEN);//item选中颜色
+   findPlaceFragment.setArguments(bundle);
+
+   fragmentTransaction.add(R.id.fragment_container, findPlaceFragment);
+   fragmentTransaction.commit();
+		
+		
 		
