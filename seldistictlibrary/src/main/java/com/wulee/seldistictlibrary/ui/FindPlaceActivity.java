@@ -46,6 +46,8 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
     public final static String INTENT_BG_GRIDITEM_DEF_COLOR = "bg_griditem_def_color"; //item默认背景色
     public final static String INTENT_BG_GRIDITEM_SEL_COLOR = "bg_griditem_sel_color"; //item选中背景色
 
+	public final static String INTENT_RETURN_PLACE = "return_place";
+
 	private TextView mTextView;
 	private RadioButton tag1, tag2, tag3;
 	private NoScroViewPager mComViewPager;
@@ -466,7 +468,7 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
              finish();
         }else if(v.getId() == R.id.btn_confirm){
 			Intent intent = getIntent();
-			intent.putExtra("place", getSelectDistrictInfo());
+			intent.putExtra(INTENT_RETURN_PLACE, getSelectDistrictInfo());
 			setResult(RESULT_OK, intent);
 			finish();
         }

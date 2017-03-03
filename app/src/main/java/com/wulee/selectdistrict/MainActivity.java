@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
                 final FindPlaceFragment findPlaceFragment = new FindPlaceFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt(FindPlaceFragment.INTENT_REQ_LEVEL, 3);
+                bundle.putInt(FindPlaceFragment.INTENT_REQ_LEVEL, FindPlaceActivity.REQ_LEVEL_3);
                 bundle.putInt(FindPlaceActivity.INTENT_BG_GRIDITEM_DEF_COLOR, Color.YELLOW);
                 bundle.putInt(FindPlaceActivity.INTENT_BG_GRIDITEM_SEL_COLOR, Color.GREEN);
                 findPlaceFragment.setArguments(bundle);
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, FindPlaceActivity.class);
-                intent.putExtra(FindPlaceActivity.INTENT_REQ_LEVEL,3);
+                intent.putExtra(FindPlaceActivity.INTENT_REQ_LEVEL,FindPlaceActivity.REQ_LEVEL_3);
                 intent.putExtra(FindPlaceActivity.INTENT_BG_TITLE_COLOR, ContextCompat.getColor(MainActivity.this,R.color.color_orange_dark));
                 intent.putExtra(FindPlaceActivity.INTENT_BG_GRIDITEM_DEF_COLOR, Color.GREEN);
                 intent.putExtra(FindPlaceActivity.INTENT_BG_GRIDITEM_SEL_COLOR, Color.RED);
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && data != null) {
-            SearchComPlaceResult pr = (SearchComPlaceResult) data.getSerializableExtra("place");
+            SearchComPlaceResult pr = (SearchComPlaceResult) data.getSerializableExtra(FindPlaceActivity.INTENT_RETURN_PLACE);
             String areaId = "";
             if (Util.isSpeRegion(pr.getProvinceID())) {
                 areaId = String.format("%06d", pr.getProvinceID());
