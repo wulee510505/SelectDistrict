@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                             sb.append(place.getProvinceName()).append(place.getCityName()).append(place.getAreaName());
 
                         if(sb.toString().length() > 0)
-                           Toast.makeText(MainActivity.this, sb.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, sb.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
