@@ -467,6 +467,34 @@ public class FindPlaceActivity extends AppCompatActivity implements OnClickListe
 		}else if(v.getId() == R.id.rl_back){
              finish();
         }else if(v.getId() == R.id.btn_confirm){
+			if(req_Level == REQ_LEVEL_1){
+				if(TextUtils.isEmpty(selProvinceId)){
+					Toast.makeText(mContext, "请选择省份", Toast.LENGTH_SHORT).show();
+					return;
+				}
+			}else if(req_Level == REQ_LEVEL_2){
+				if(TextUtils.isEmpty(selProvinceId)){
+					Toast.makeText(mContext, "请选择省份", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				if(TextUtils.isEmpty(selCityId)){
+					Toast.makeText(mContext, "请选择市", Toast.LENGTH_SHORT).show();
+					return;
+				}
+			}else if(req_Level == REQ_LEVEL_3){
+				if(TextUtils.isEmpty(selProvinceId)){
+					Toast.makeText(mContext, "请选择省份", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				if(TextUtils.isEmpty(selCityId)){
+					Toast.makeText(mContext, "请选择市", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				if(TextUtils.isEmpty(selAreaId)){
+					Toast.makeText(mContext, "请选择区/县", Toast.LENGTH_SHORT).show();
+					return;
+				}
+			}
 			Intent intent = getIntent();
 			intent.putExtra(INTENT_RETURN_PLACE, getSelectDistrictInfo());
 			setResult(RESULT_OK, intent);

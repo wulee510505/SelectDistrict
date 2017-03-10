@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textColor="@color/ctv_white"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:text="选择省市区"/>
 
 

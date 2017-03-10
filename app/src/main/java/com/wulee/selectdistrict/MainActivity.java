@@ -60,8 +60,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         SearchComPlaceResult place = findPlaceFragment.getSelectDistrictInfo();
                         StringBuilder sb = new StringBuilder();
-                        sb.append(place.getProvinceName()).append(place.getCityName()).append(place.getAreaName());
-                        Toast.makeText(MainActivity.this, sb.toString(), Toast.LENGTH_SHORT).show();
+                        if(!TextUtils.isEmpty(place.getProvinceName()) && !TextUtils.isEmpty(place.getCityName()) && !TextUtils.isEmpty(place.getAreaName()))
+                            sb.append(place.getProvinceName()).append(place.getCityName()).append(place.getAreaName());
+
+                        if(sb.toString().length() > 0)
+                           Toast.makeText(MainActivity.this, sb.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
